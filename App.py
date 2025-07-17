@@ -6,12 +6,12 @@ import os
 
 
 # Google Drive file ID
-file_id = "1PWvwViAUAzCRywxroj9__Wil5jLXUgKj"
-url = f"https://drive.google.com/uc?id={file_id}"
+# file_id = "1PWvwViAUAzCRywxroj9__Wil5jLXUgKj"
+# url = f"https://drive.google.com/uc?id={file_id}"
 
 # ✅ Download similarity.pkl only if it doesn't exist locally
 if not os.path.exists('similarity.pkl'):
-    gdown.download(url, 'similarity.pkl', quiet=False)
+    gdown.download(f"https://drive.google.com/file/d/1PWvwViAUAzCRywxroj9__Wil5jLXUgKj/view?usp=sharing", 'similarity.pkl', quiet=False)
 
 # Load both pickle files
 movies = pickle.load(open("movies_list.pkl",'rb'))
