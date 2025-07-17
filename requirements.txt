@@ -1,0 +1,8 @@
+
+Python 3.12
+
+streamlit framework
+gdown library
+pandas library
+numpy library
+scikit-learn library
