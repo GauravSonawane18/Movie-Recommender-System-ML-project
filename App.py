@@ -1,11 +1,24 @@
 import streamlit as st
 import pickle
+import gdown
+import os
 # import requests
 
+
+# Google Drive file ID
+file_id = "1PWvwViAUAzCRywxroj9__Wil5jLXUgKj"
+url = f"https://drive.google.com/uc?id={file_id}"
+
+# ✅ Download similarity.pkl only if it doesn't exist locally
+if not os.path.exists('similarity.pkl'):
+    gdown.download(url, 'similarity.pkl', quiet=False)
+
+# Load both pickle files
 movies = pickle.load(open("movies_list.pkl",'rb'))
 similarity = pickle.load(open("similarity.pkl",'rb'))
 movies_list = movies['title'].values
 
+# Streamlit UI
 st.header("Movie Recommender System")
 selectvalue = st.selectbox("Select movie from dropdown", movies_list)
 
@@ -30,14 +43,13 @@ def recommend(movie):
     recommend_movie=[]
     # recommend_movie_ids = []
     for i in distance[1:7]:
-        movies_id=movies.iloc[i[0]].id
+        # movies_id=movies.iloc[i[0]].id
         recommend_movie.append(movies.iloc[i[0]].title)
         # recommend_movie_ids.append(movies.iloc[i[0]].id)
-
         # posters = [fetch_movie_poster(movie_id) for movie_id in recommend_movie_ids]
     return recommend_movie
 
-
+# Display recommendations
 if st.button("Show Recommendation"):
     movie_name = recommend(selectvalue)
     c = st.container()
